@@ -25,6 +25,7 @@ wordcloud==1.9.4
 fastapi
 uvicorn
 streamlit
+streamlit-timeline
 google-cloud-bigquery
 
 # Visualization
