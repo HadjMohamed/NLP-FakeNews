@@ -1,6 +1,8 @@
 import numpy as np
 import tensorflow as tf
-from transformers import AutoTokenizer, TFBertForSequenceClassification
+from transformers import AutoTokenizer, TFBertForSequenceClassification, AutoModelForSequenceClassification
+import torch
+import torch.nn.functional as F
 
 def predict_text(text, threshold=0.5):
     """
@@ -18,7 +20,7 @@ def predict_text(text, threshold=0.5):
         'TFBertForSequenceClassification': TFBertForSequenceClassification
     })
     loaded_model = tf.keras.models.load_model("src/dataprediction/model/fakenews_prediction_model.h5")
-    
+
     # Tokenisation
     tokenized_input = tokenizer(text,
                             max_length=max_len,
@@ -28,10 +30,10 @@ def predict_text(text, threshold=0.5):
                             return_token_type_ids=False,
                             return_attention_mask=True,
                             return_tensors='tf')
-       
+    
     # Prédiction
     prediction = loaded_model(tokenized_input)
-   
+
     # Récupération des logits
     scores = tf.nn.sigmoid(prediction).numpy()
 
@@ -40,8 +42,9 @@ def predict_text(text, threshold=0.5):
 
     return {"score": scores[0][0], "prediction": "FAKE NEWS" if predicted_class[0][0] == 0 else "REAL NEWS"}
 
+
 if __name__ == "__main__":
     # Exemple d'utilisation
-    text_sample = "Hello, this is a sample text for prediction."
+    text_sample = " is sticking to his tariff guns, shutting down fake news reports Washington would delay their enforcement for 90 days to allow for negotiations with other countries.We are not looking into that. We have many, many countries that are coming to negotiate deals with us said."
     result = predict_text(text_sample)
     print(result)

@@ -8,23 +8,15 @@ st.set_page_config(
     layout="wide"
 )
 
-#Welcoming message 
-st.title("Welcome to the Reddit Fake News Detector!")
-st.markdown("""
-This dashboard provides real-time insights into the classification of [r/worldnews](https://www.reddit.com/r/worldnews/new/) articles.
-The data is refreshed every 24 hours.
-""")
-
-# 🎨 Header
-st.title("📰 Live News Table")
-st.caption("Real-time data from Google BigQuery – refreshed every 24h.")
+# 🌐 Langue
+lang = st.sidebar.selectbox("Language / Langue", ["English", "Français"])
 
 # 🔐 Authentification GCP
 gcp_secrets = st.secrets["gcp_service_account"]
 dataset_info = st.secrets["id"]
 project_id = gcp_secrets["project_id"]
 dataset = dataset_info["dataset"]
-table = dataset_info["table"]
+table = dataset_info["table1"]
 
 credentials = service_account.Credentials.from_service_account_info(gcp_secrets)
 client = bigquery.Client(credentials=credentials, project=project_id)
@@ -40,31 +32,61 @@ def get_data():
     return df
 
 # 🔁 Rafraîchissement manuel
-if st.sidebar.button("🔁 Refresh data"):
+if st.sidebar.button("🔁 Refresh data / Rafraîchir les données"):
     st.cache_data.clear()
 
 df = get_data()
 
-# 🎛 Filtres dynamiques
-with st.expander("🔎 Filter options"):
-    predictions = st.multiselect(
-        "Select News Type(s)", 
-        options=df['Prediction'].unique(), 
-        default=list(df['Prediction'].unique())
-    )
-    df = df[df['Prediction'].isin(predictions)]
+# === 🇬🇧 ENGLISH VERSION ===
+if lang == "English":
+    st.title("Welcome to the Reddit Fake News Detector!")
+    st.markdown("""
+    This dashboard provides real-time insights into the classification of [r/worldnews](https://www.reddit.com/r/worldnews/new/) articles.  
+    The data is refreshed every 24 hours.
+    """)
 
-# 📋 Affichage du tableau
-st.data_editor(
-    df,
-    column_config={
-        "URL": st.column_config.LinkColumn(
-            "Title",  # Le nom de la colonne dans le tableau
-            display_text=f"{df['Title']}",  # Utilise le titre du DataFrame comme texte du lien
+    st.title("📰 News Live Table")
+    st.caption("Real-time data from Google BigQuery – refreshed every 24h.")
+
+    with st.expander("🔎 Filter options"):
+        predictions = st.multiselect(
+            "Select News Type(s)", 
+            options=df['Prediction'].unique(), 
+            default=list(df['Prediction'].unique())
         )
-    },
-    column_order=["URL", "Date", "Scrapping Status", "Score", "Prediction"],
-    hide_index=True,
-    use_container_width=True
-)
+        df = df[df['Prediction'].isin(predictions)]
 
+    st.dataframe(
+        df,
+        column_config={
+            "URL": st.column_config.LinkColumn(),
+        },
+        hide_index=True,
+    )
+
+# === 🇫🇷 VERSION FRANÇAISE ===
+else:
+    st.title("Bienvenue sur le détecteur de Fake News Reddit !")
+    st.markdown("""
+    Ce tableau de bord fournit une analyse en temps réel des articles postés sur [r/worldnews](https://www.reddit.com/r/worldnews/new/).  
+    Les données sont mises à jour toutes les 24 heures.
+    """)
+
+    st.title("📰 Actualités en direct")
+    st.caption("Données issues de Google BigQuery – actualisées toutes les 24h.")
+
+    with st.expander("🔎 Options de filtrage"):
+        predictions = st.multiselect(
+            "Sélectionner le(s) type(s) de news", 
+            options=df['Prediction'].unique(), 
+            default=list(df['Prediction'].unique())
+        )
+        df = df[df['Prediction'].isin(predictions)]
+
+    st.dataframe(
+        df,
+        column_config={
+            "URL": st.column_config.LinkColumn(),
+        },
+        hide_index=True,
+    )

@@ -14,7 +14,7 @@ class InputDict(BaseModel):
     source: str
     official_title: str
     real_content: str
-    scrapping_status: str
+    scrapping_status: bool
     
     # Option
     score: float = None

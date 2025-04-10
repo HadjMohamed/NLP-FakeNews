@@ -1,0 +1,83 @@
+{
+    "title": {
+      "text": {
+        "headline": "Roadmap – Fake News Detector",
+        "text": "<p>Suivi du développement de notre projet de détection de fake news à partir de Reddit.</p>"
+      }
+    },
+    "events": [
+      {
+        "start_date": { "year": "2025", "month": "3", "day": "31" },
+        "end_date": { "year": "2025", "month": "4", "day": "1" },
+        "text": {
+          "headline": "Préparation du projet",
+          "text": "<ul><li>Structuration du dépôt Github</li><li>Choix des outils</li><li>Définition des objectifs</li></ul>"
+        }
+      },
+      {
+        "start_date": { "year": "2025", "month": "4", "day": "1" },
+        "end_date": { "year": "2025", "month": "4", "day": "4" },
+        "text": {
+          "headline": "Connexion à l’API Reddit et Scrapping",
+          "text": "<ul><li>Création des credentials</li><li>Extraction des données Reddit</li><li>Scrapping des données sur les articles à partir d'un URL avec Newspaper3k</li></ul>"
+        }
+      },
+      {
+        "start_date": { "year": "2025", "month": "4", "day": "1" },
+        "end_date": { "year": "2025", "month": "4", "day": "4" },
+        "text": {
+          "headline": "Pipeline de données",
+          "text": "<ul><li>Extraction & nettoyage des données</li><li>Transformation</li><li>Envoi vers BigQuery</li><li>Orchestration avec Airflow</li></ul>"
+        }
+      },
+      {
+        "start_date": { "year": "2025", "month": "4", "day": "1" },
+        "end_date": { "year": "2025", "month": "4", "day": "4" },
+        "text": {
+          "headline": "Entraînement du modèle BERT",
+          "text": "<ul><li>Préparation du dataset</li><li>Fine-tuning</li><li>Évaluation du modèle</li></ul>"
+        }
+      },
+      {
+        "start_date": { "year": "2025", "month": "4", "day": "4" },
+        "end_date": { "year": "2025", "month": "4", "day": "5" },
+        "text": {
+          "headline": "Déploiement de l'API",
+          "text": "<ul><li>FastAPI</li><li>Intégration du modèle sur l'API</li></ul>"
+        }
+      },
+      {
+        "start_date": { "year": "2025", "month": "4", "day": "7" },
+        "end_date": { "year": "2025", "month": "4", "day": "9" },
+        "text": {
+          "headline": "Développement du dashboard Streamlit",
+          "text": "<ul><li>Affichage dynamique des news</li><li>Intégration du modèle de prédiction</li></ul>"
+        }
+      },
+      {
+        "start_date": { "year": "2025", "month": "4", "day": "7" },
+        "end_date": { "year": "2025", "month": "4", "day": "9" },
+        "text": {
+          "headline": "Mise en commun locale",
+          "text": "<ul><li>Connexion Streamlit ↔ API</li><li>Tests de bout en bout</li></ul>"
+        }
+      },
+      {
+        "start_date": { "year": "2025", "month": "4", "day": "9" },
+        "end_date": { "year": "2025", "month": "4", "day": "10" },
+        "text": {
+          "headline": "Déploiement avec Terraform",
+          "text": "<ul><li>Provisioning GCP/AWS</li><li>Déploiement infra complète</li></ul>"
+        }
+      },
+      {
+        "start_date": { "year": "2025", "month": "4", "day": "9" },
+        "end_date": { "year": "2025", "month": "4", "day": "10" },
+        "text": {
+          "headline": "Préparation de la présentation",
+          "text": "<ul><li>README & documentation</li><li>Support de pitch</li></ul>"
+        }
+      }
+    ]
+  }
+  
