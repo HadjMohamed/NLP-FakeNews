@@ -4,6 +4,10 @@ import json
 import pandas as pd
 from google.cloud import bigquery
 from google.oauth2 import service_account
+import os 
+
+current_dir = os.path.dirname(__file__)
+image_path = os.path.join(current_dir, "images", "global_pipeline.png")
 
 st.set_page_config(
     page_title="Aperçu du Projet",
@@ -29,7 +33,7 @@ if lang == "English":
         # 🖼️ Schéma d'architecture
         st.header("📌 Global Architecture")
 
-        st.image("images/global_pipeline.png", caption="Overview of the project architecture")
+        st.image(image_path, caption="Overview of the project architecture")
 
         # 🔄 Etapes
         st.header("⚙️ System Components")
