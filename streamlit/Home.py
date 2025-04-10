@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 # 🌐 Langue
-lang = st.sidebar.selectbox("Language / Langue", ["English", "Français"])
+lang = st.sidebar.selectbox("Langue / Language", [ "Français","English"])
 
 # 🔐 Authentification GCP
 gcp_secrets = st.secrets["gcp_service_account"]

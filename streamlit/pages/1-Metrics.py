@@ -7,7 +7,7 @@ from google.oauth2 import service_account
 st.set_page_config(page_title="Statistics & Metrics", layout="wide")
 
 # 🌐 Language selector
-lang = st.sidebar.selectbox("Language / Langue", ["English", "Français"])
+lang = st.sidebar.selectbox("Langue / Language", [ "Français","English"])
 
 # 🔐 Auth
 gcp_secrets = st.secrets["gcp_service_account"]

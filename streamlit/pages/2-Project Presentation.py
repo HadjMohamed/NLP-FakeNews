@@ -18,7 +18,7 @@ st.set_page_config(
 )
 
 # Selectbox pour choisir la langue
-lang = st.sidebar.selectbox("Language / Langue", ["English", "Français"])
+lang = st.sidebar.selectbox("Langue / Language", [ "Français","English"])
 
 # Contenu en fonction de la langue sélectionnée
 if lang == "English":
@@ -75,7 +75,7 @@ if lang == "English":
         # Affichage de la timeline
         timeline(data, height=700)
     with tab2:
-        st.title("Apache Airflow")
+        st.image(path_to_image("AirflowLogo.png"), width=700)
 
         st.header("What is Airflow?")
         st.markdown("""
@@ -204,8 +204,7 @@ elif lang== "Français":
 
 
     with tab2:
-        st.title("Apache Airflow")
-
+        st.image(path_to_image("AirflowLogo.png"), width=700)
         st.header("Qu'est-ce qu'Airflow ?")
         st.markdown("""
         Apache Airflow est une plateforme open-source d'orchestration de workflows qui vous permet de créer, planifier et surveiller des workflows.
@@ -235,6 +234,7 @@ elif lang== "Français":
         st.image(path_to_image("ariflow.png"), caption="Graphique du DAG")
 
         st.write("Toute cette architecture est ensuite déployée avec l'IaC (Infrastructure as Code) avec Terraform. Terraform est un outil open-source qui permet de créer, gérer et provisionner des infrastructures cloud en utilisant du code.")
+        st.image(path_to_image("Terraform_Logo.png"))
         st.image(path_to_image("infrastructure_fakenews.png"), caption="IaC")
 
 

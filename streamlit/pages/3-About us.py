@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(page_title="About the Project", layout="centered")
 
 # 🌐 Language selector
-lang = st.sidebar.selectbox("Language / Langue", ["English", "Français"])
+lang = st.sidebar.selectbox("Langue / Language", [ "Français","English"])
 
 # === 🇬🇧 ENGLISH VERSION ===
 if lang == "English":
