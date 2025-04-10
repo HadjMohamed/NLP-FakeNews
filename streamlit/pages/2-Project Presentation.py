@@ -7,7 +7,10 @@ from google.oauth2 import service_account
 import os 
 
 current_dir = os.path.dirname(__file__)
-image_path = os.path.join(current_dir, "images","global_pipeline.png")
+def path_to_image(image_name):
+    image_path = os.path.join(current_dir, "images")
+    image_path=os.path.join(current_dir, image_path,image_name)
+    return image_path
 
 st.set_page_config(
     page_title="Aperçu du Projet",
@@ -33,7 +36,7 @@ if lang == "English":
         # 🖼️ Schéma d'architecture
         st.header("📌 Global Architecture")
 
-        st.image(image_path, caption="Overview of the project architecture")
+        st.image(path_to_image("global_pipeline.png"), caption="Overview of the project architecture")
 
         # 🔄 Etapes
         st.header("⚙️ System Components")
@@ -66,7 +69,7 @@ if lang == "English":
         # 🗺️ Roadmap
         st.header("📅 Roadmap")
         
-        with open("timeline.json", "r") as f:
+        with open(os.path.join(current_dir, "timeline.json"), "r") as f:
             data = json.load(f)
 
         # Affichage de la timeline
@@ -98,13 +101,13 @@ if lang == "English":
         """)
 
         st.write("Here is the overall goal of the project with the two existing DAGs:")
-        st.image("images/airflow_copie.png", caption="Execution DAG")
+        st.image(path_to_image("airflow_copie.png"), caption="Execution DAG")
         st.write("The model_to_bq DAG")
-        st.image("images/dag_airflow.png", caption="Model DAG")
-        st.image("images/ariflow.png", caption="DAG Graph")
+        st.image(path_to_image("dag_airflow.png"), caption="Model DAG")
+        st.image(path_to_image("ariflow.png"), caption="DAG Graph")
 
         st.write("This entire architecture is then deployed using IaC (Infrastructure as Code) with Terraform. Terraform is an open-source tool that allows you to create, manage, and provision cloud infrastructure using code.")
-        st.image("images/infrastructure_fakenews.png", caption="IaC")
+        st.image(path_to_image("infrastructure_fakenews.png"), caption="IaC")
     with tab3:
         st.write("For training our model, we used the  datasets Fake.csv and True.csv from Kaggle.")
         st.write("""
@@ -116,8 +119,8 @@ if lang == "English":
                 
                 Let's have a look at the most frequent words in each dataset.
                 """)
-        st.image("images/wordcloudfake.png")
-        st.image("images/wordcloudtrue.png")
+        st.image(path_to_image("wordcloudfake.png"))
+        st.image(path_to_image("wordcloudtrue.png"))
         st.write("""
                 The model was trained using a **BERT-based** architecture, which is a transformer model pre-trained on a large corpus of text data. 
                 The model was fine-tuned on the fake news dataset to learn the specific patterns and features that distinguish fake news from real news.
@@ -125,8 +128,8 @@ if lang == "English":
                 Finally we obtained a model with an accuracy of **97%** on the test set.
                 Here is an example of how the model treats a sentence and the result associated.
                 """)
-        st.image("images/shap.png")
-        st.image("images/result.png")
+        st.image(path_to_image("shap.png"))
+        st.image(path_to_image("result.png"))
     with tab4:
         st.markdown("""
     💡 Here are some key areas for future improvements to make the project even more robust and impactful:
@@ -163,7 +166,7 @@ elif lang== "Français":
 
         # 🖼️ Schéma d'architecture
         st.header("📌 Architecture globale")
-        #st.image("images/system_schema.png", caption="Aperçu de l'architecture du projet", use_column_width=True)
+        st.image(path_to_image("global_pipeline.png"), caption="Overview of the project architecture")
 
         # 🔄 Etapes
         st.header("⚙️ Composants du système")
@@ -193,7 +196,7 @@ elif lang== "Français":
         # 🗺️ Roadmap
         st.header("📅 Roadmap")
         
-        with open("timeline.json", "r") as f:
+        with open(os.path.join(current_dir, "timeline.json"), "r") as f:
             data = json.load(f)
 
         # Affichage de la timeline
@@ -227,13 +230,12 @@ elif lang== "Français":
         """)
 
         st.write("Voici l'objectif global du projet avec les deux DAGs existants :")
-        st.image("images/airflow_copie.png", caption="DAG d'exécution")
-        st.write("Le DAG `model_to_bq`")
-        st.image("images/dag_airflow.png", caption="DAG du modèle")
-        st.image("images/ariflow.png", caption="Graphique du DAG")
+        st.image(path_to_image("airflow_copie.png"), caption="DAG d'exécution")
+        st.image(path_to_image("dag_airflow.png"), caption="DAG du modèle")
+        st.image(path_to_image("ariflow.png"), caption="Graphique du DAG")
 
         st.write("Toute cette architecture est ensuite déployée avec l'IaC (Infrastructure as Code) avec Terraform. Terraform est un outil open-source qui permet de créer, gérer et provisionner des infrastructures cloud en utilisant du code.")
-        st.image("images/infrastructure_fakenews.png", caption="IaC")
+        st.image(path_to_image("infrastructure_fakenews.png"), caption="IaC")
 
 
     with tab3:
@@ -246,8 +248,8 @@ elif lang== "Français":
                  
                     Voyons les mots les plus fréquents dans chaque jeu de données.
                  """)
-        st.image("images/wordcloudfake.png")
-        st.image("images/wordcloudtrue.png")
+        st.image(path_to_image("wordcloudfake.png"))
+        st.image(path_to_image("wordcloudtrue.png"))
         st.write("""
                     Le modèle a été entraîné avec une architecture **basée sur BERT**, un modèle de transformateur pré-entraîné sur un grand corpus de données textuelles. 
                     Le modèle a été ajusté sur l'ensemble de données des fake news pour apprendre les motifs et les caractéristiques spécifiques qui distinguent les fake news des vraies news.
@@ -255,8 +257,8 @@ elif lang== "Français":
                     Enfin, nous avons obtenu un modèle avec une précision de **97%** sur l'ensemble de test.
                     Voici un exemple de la manière dont le modèle traite une phrase et le résultat associé.
                  """)
-        st.image("images/shap.png")
-        st.image("images/result.png")
+        st.image(path_to_image("shap.png"))
+        st.image(path_to_image("result.png"))
 
 
     with tab4:
