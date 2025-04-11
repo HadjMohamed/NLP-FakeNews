@@ -1,7 +1,12 @@
+# Imports
 import streamlit as st
 import pandas as pd
-from google.cloud import bigquery
-from google.oauth2 import service_account
+#from google.cloud import bigquery (commented to use a localdataframe as the GCP is no longer available)
+#from google.oauth2 import service_account
+import os
+current_dir = os.path.dirname(__file__)
+
+# 📊 Streamlit
 
 st.set_page_config(
     page_title="Fake News Dashboard",
@@ -11,21 +16,24 @@ st.set_page_config(
 # 🌐 Langue
 lang = st.sidebar.selectbox("Langue / Language", [ "Français","English"])
 
-# 🔐 Authentification GCP
-gcp_secrets = st.secrets["gcp_service_account"]
-dataset_info = st.secrets["id"]
-project_id = gcp_secrets["project_id"]
-dataset = dataset_info["dataset"]
-table = dataset_info["table1"]
+# 🔐 Authentification GCP (commented to use a localdataframe)
+# gcp_secrets = st.secrets["gcp_service_account"]
+# dataset_info = st.secrets["id"]
+# project_id = gcp_secrets["project_id"]
+# dataset = dataset_info["dataset"]
+# table = dataset_info["table1"]
 
-credentials = service_account.Credentials.from_service_account_info(gcp_secrets)
-client = bigquery.Client(credentials=credentials, project=project_id)
+# credentials = service_account.Credentials.from_service_account_info(gcp_secrets)
+# client = bigquery.Client(credentials=credentials, project=project_id)
 
 # 📥 Chargement des données
 @st.cache_data(ttl=86400)
 def get_data():
-    query = f"SELECT title, date_reference, scrapping_status, score, prediction, url FROM `{project_id}.{dataset}.{table}`"
-    df = client.query(query).to_dataframe()
+    #query = f"SELECT title, date_reference, scrapping_status, score, prediction, url FROM `{project_id}.{dataset}.{table}`"
+    #df = client.query(query).to_dataframe()
+    df=pd.read_csv(os.path.join(current_dir, "predicted_news.csv"))
+    # Select only the relevant columns
+    df = df[['title', 'date_reference', 'scrapping_status', 'score', 'prediction', 'url']]
     df['date_reference'] = pd.to_datetime(df['date_reference'])
     df['prediction'] = df['prediction'].str.strip()
     df.columns = ['Title', 'Date', 'Status', 'Score', 'Prediction','URL']
