@@ -2,8 +2,6 @@ import streamlit as st
 from streamlit_timeline import timeline
 import json
 import pandas as pd
-from google.cloud import bigquery
-from google.oauth2 import service_account
 import os 
 
 current_dir = os.path.dirname(__file__)
