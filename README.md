@@ -6,6 +6,8 @@ Welcome to the **Reddit Fake News Detector** – a data-driven system designed t
 For this project, we had 2 weeks to build a **proof of concept**. The goal was to create a **pipeline** that could be used to scrape, store, and analyze news headlines from the worldNews Reddit and check their veracity.
 The project is built using **Python** and various libraries such as **Streamlit**, **Pandas**, and **Scikit-learn**. The machine learning model is based on the **BERT** architecture, which is fine-tuned for the task of fake news detection.
 
+**Website is available [here](https://reddit-fake-news-detector.streamlit.app/)**
+
 ### 🛠 Tech stack
 
 - **RedditAPI** for scraping news articles from [r/worldnews](https://www.reddit.com/r/worldnews/new/)
